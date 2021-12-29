@@ -1,0 +1,1 @@
+call "%~dp0\stadlerno" eval Stadlerno.Release.migrate
