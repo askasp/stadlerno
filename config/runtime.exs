@@ -8,9 +8,7 @@ import Config
 # The block below contains prod specific runtime configuration.
 
 # Start the phoenix server if environment is set and running in a  release
-if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
-  config :stadlerno, StadlernoWeb.Endpoint, server: true
-end
+config :stadlerno, StadlernoWeb.Endpoint, server: true
 
 if config_env() == :prod do
   database_url =
@@ -44,7 +42,9 @@ if config_env() == :prod do
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :stadlerno, StadlernoWeb.Endpoint,
-    url: [host: host, port: 443],
+
+  	check_origin: false,
+    # url: [host: host, port: 443],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
