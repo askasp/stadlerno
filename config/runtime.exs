@@ -44,7 +44,8 @@ if config_env() == :prod do
   config :stadlerno, StadlernoWeb.Endpoint,
 
   	check_origin: false,
-    url: [host: host, port: 4000],
+    # url: [host: host, port: 4000],
+    url: [port: 4000],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
