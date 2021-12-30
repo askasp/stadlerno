@@ -142,7 +142,12 @@ var cy = cytoscape({
 
 
 cy.on('tap', 'node', function(){
+  if (this.data('href') !== undefined) {
     window.location.href = this.data('href');
+  }
+  else{
+    alert ("Clicking tags is not supported yet, try a node (white) instead");
+  }
 });
 
 

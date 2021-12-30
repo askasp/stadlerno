@@ -14,7 +14,7 @@ defmodule StadlernoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  use Kaffy.Routes, scope: "/admin", pipe_through: []
+  use Kaffy.Routes, scope: "/admin", pipe_through: [:auth]
 
   scope "/", StadlernoWeb do
     pipe_through :browser
@@ -57,4 +57,12 @@ defmodule StadlernoWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+
+defp auth(conn, _opts) do
+  username = "admin"
+  password = System.fetch_env!("ADMIN_PW")
+  Plug.BasicAuth.basic_auth(conn, username: username, password: password)
+end
+
 end

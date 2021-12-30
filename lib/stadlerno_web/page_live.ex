@@ -32,7 +32,7 @@ defmodule StadlernoWeb.PageLive do
       |> length
 
     {:ok,
-     assign(socket, post: post, checked: false, tab: "chart", messages: [], reader_count: count, search_result: [])}
+     assign(socket, posts: Stadlerno.Wiki.list_posts(), post: post, checked: false, tab: "chart", messages: [], reader_count: count, search_result: [])}
   end
 
   def handle_params(params, uri, socket) do
@@ -151,7 +151,7 @@ defmodule StadlernoWeb.PageLive do
       <div class="shadow bg-base-200 drawer w-screen drawer-mobile overflow-x-hidden ">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" checked={@checked}>
 
-    <div class="flex flex-col bg-base-200 prose max-w-none drawer-content px-5 py-10 md:px-20">
+    <div class="flex flex-col bg-base-200 prose max-w-none drawer-content px-5 py-10 md:px-40">
 
     <form class="absolute top-5 right-20 w-3/4 md:w-full md:static" phx-change="search_wiki" phx-submit="search_wiki">
     <div class="flex-1 lg:flex-none">
@@ -225,7 +225,7 @@ defmodule StadlernoWeb.PageLive do
 
     <div id="cy"  class="w-full md:w-[50vw] md:absolute md:left-0  h-[70vh]"  phx-hook="NodeChart">  </div>
     <% "chat" ->%> <%= chat(%{messages: @messages, reader_count: @reader_count}) %>
-    <% "toc" ->%> <%= toc(%{}) %>
+    <% "toc" ->%> <%= toc(%{posts: @posts }) %>
     <% end %>
     </div>
     </div>
@@ -277,9 +277,11 @@ defmodule StadlernoWeb.PageLive do
     ~H"""
     <h2 style="margin-top: 1em"> Table Of Contents: </h2>
     <ul>
-    <li class="text-3xl"> About me </li>
-    <li class="text-3xl"> Projects </li>
-    <li class="text-3xl"> Blogs and random thoughts </li>
+    <%= for  post <- @posts do %>
+    	<%= live_patch to: "/post/" <> Integer.to_string(post.id)  do %>
+    		<li class="text-2xl"> <%= post.title %> </li>
+    	<% end %>
+    <% end %>
     </ul>
     """
   end
