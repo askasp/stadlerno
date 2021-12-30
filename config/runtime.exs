@@ -44,14 +44,14 @@ if config_env() == :prod do
   config :stadlerno, StadlernoWeb.Endpoint,
 
   	check_origin: false,
-    # url: [host: host, port: 443],
+    url: [host: host, port: 4000],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
       # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
       # for details about using IPv6 vs IPv4 and loopback vs public addresses.
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: port
+      port: "4000"
     ],
     secret_key_base: secret_key_base
 
