@@ -20,7 +20,7 @@ defmodule Stadlerno.MixProject do
   def application do
     [
       mod: {Stadlerno.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
