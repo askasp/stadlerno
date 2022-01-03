@@ -147,6 +147,8 @@ defmodule StadlernoWeb.PageLive do
 
   def render(assigns) do
     ~H"""
+
+
       <div class="drawer drawer-top h-screen overflow-x-hidden ">
       <div class="shadow bg-base-200 drawer w-screen drawer-mobile overflow-x-hidden ">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" checked={@checked}>
